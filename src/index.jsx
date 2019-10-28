@@ -1,6 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./styles.scss";
-import Main from "./views/Main";
+import { BrowserRouter as Router } from "react-router-dom";
 
-ReactDOM.render(<Main />, document.getElementById("root")); //ADD NEW COMPONENTS TO MAIN
+import "./styles.scss";
+import Routes from "./views/Routes";
+
+ReactDOM.render(
+  <Router>
+    <Routes />
+  </Router>,
+  document.getElementById("root")
+); //ADD NEW COMPONENTS TO MAIN

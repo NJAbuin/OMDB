@@ -8,6 +8,7 @@ export default class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = { title: "", movies: [] };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

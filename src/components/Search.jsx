@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import SingleMovie from "../components/SingleMovie";
+import { fetchMovie } from "../actions/movies";
+import store from "../store";
+import { connect } from "react-redux";
 
-const omdb = "http://www.omdbapi.com/?apikey=45f5a1ca&";
-
-export default class Search extends React.Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { title: "", movies: [] };
+    this.state = { title: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,9 +20,11 @@ export default class Search extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios
-      .get(`${omdb}s=${this.state.title}`)
-      .then(response => this.setState({ movies: response.data.Search }));
+    this.props.fetchMovie(this.state.title);
+
+    // axios
+    //   .get(`${omdb}s=${this.state.title}`)
+    //   .then(response => this.setState({ movies: response.data.Search }));
   }
 
   render() {
@@ -30,17 +33,28 @@ export default class Search extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Title :
-            <input
-              type="text"
-              value={this.state.title}
-              onChange={this.handleChange}
-            />
+            <input type="text" onChange={this.handleChange} />
           </label>
           <input type="submit" value="Search" />
         </form>
 
-        <SingleMovie movies={this.state.movies} />
+        <SingleMovie />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    foundMovies: state
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchMovie: title => dispatch(fetchMovie(title))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Search);

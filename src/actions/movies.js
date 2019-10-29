@@ -10,3 +10,13 @@ export const fetchMovie = title => dispatch => {
     })
   );
 };
+
+export const selectMovie = id => dispatch => {
+  console.log("fetching");
+  axios.get(`${omdb}i=${id}`).then(response =>
+    dispatch({
+      type: SELECT_MOVIE,
+      payload: response
+    })
+  );
+};

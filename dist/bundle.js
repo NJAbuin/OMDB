@@ -33970,7 +33970,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40596,12 +40596,17 @@ function (_Component) {
         _this2.setState({
           movie: response.data
         });
+
+        console.log(_this2.state.movie);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "DETAILS:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Title: ", this.state.movie.Title, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Released: ", this.state.movie.Released, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Genre: ", this.state.movie.Genre, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Metascore: ", this.state.movie.Metascore, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Plot: ", this.state.movie.Plot, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "DETAILS:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Title: ", this.state.movie.Title, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Released: ", this.state.movie.Released, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Genre: ", this.state.movie.Genre, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Director: ", this.state.movie.Director, "Actors:", this.state.movie.Actors, "Country: ", this.state.movie.Country, "IMDB Rating: ", this.state.movie.imdbRating, "Metascore: ", this.state.movie.Metascore, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Plot: ", this.state.movie.Plot, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.movie.Poster,
+        key: this.state.movie.imdbID
+      }));
     }
   }]);
 

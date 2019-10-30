@@ -6,12 +6,13 @@ const Model = Sequelize.Model;
 class User extends Model {}
 User.init(
   {
-    firstName: {
+    email: {
       type: Sequelize.STRING,
       allowNUll: false
     },
-    age: {
-      type: Sequelize.INTEGER
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false
     }
   },
   {

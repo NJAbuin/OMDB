@@ -16,6 +16,7 @@ class MovieDetails extends Component {
   componentWillMount() {
     axios.get(`${omdb}i=${this.id}`).then(response => {
       this.setState({ movie: response.data });
+      console.log(this.state.movie);
     });
   }
 
@@ -27,9 +28,14 @@ class MovieDetails extends Component {
           Title: {this.state.movie.Title} <br />
           Released: {this.state.movie.Released} <br />
           Genre: {this.state.movie.Genre} <br />
+          Director: {this.state.movie.Director}
+          Actors:{this.state.movie.Actors}
+          Country: {this.state.movie.Country}
+          IMDB Rating: {this.state.movie.imdbRating}
           Metascore: {this.state.movie.Metascore} <br />
           Plot: {this.state.movie.Plot} <br />
         </p>
+        <img src={this.state.movie.Poster} key={this.state.movie.imdbID} />
       </div>
     );
   }

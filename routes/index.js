@@ -1,10 +1,8 @@
 const router = require("express").Router();
-const path = require("path");
-const DIST_DIR = path.join(__dirname, "../dist");
-const HTML_FILE = path.join(DIST_DIR, "index.html");
 
-router.get("/search", (req, res) => {
-  res.sendFile(HTML_FILE);
-});
+const User = require("../db/models/User");
+const favorite = require("./favorite");
+
+const passport = require("../db/passport");
 
 module.exports = router;

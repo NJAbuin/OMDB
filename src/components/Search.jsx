@@ -12,6 +12,8 @@ class Search extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLog = this.handleLog.bind(this);
+    this.handleReg = this.handleReg.bind(this);
   }
 
   handleChange(event) {
@@ -27,6 +29,15 @@ class Search extends React.Component {
     //   .then(response => this.setState({ movies: response.data.Search }));
   }
 
+  handleLog(e) {
+    e.preventDefault();
+    this.props.history.push("/api/login");
+  }
+  handleReg(e) {
+    e.preventDefault();
+    this.props.history.push("/api/register");
+  }
+
   render() {
     return (
       <div>
@@ -36,6 +47,8 @@ class Search extends React.Component {
             <input type="text" onChange={this.handleChange} />
           </label>
           <input type="submit" value="Search" />
+          <button onClick={this.handleLog}>Log In</button>
+          <button onClick={this.handleReg}>Register</button>
         </form>
 
         <SingleMovie />

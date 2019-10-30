@@ -1,24 +1,83 @@
+const crypto = require("crypto");
 const Sequelize = require("sequelize");
 const db = require("../index");
 
 const Model = Sequelize.Model;
 
-class User extends Model {}
-User.init(
-  {
-    email: {
-      type: Sequelize.STRING,
-      allowNUll: false
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false
-    }
+var User = db.define("user", {
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
-  {
-    sequelize: db,
-    modelName: "user"
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  salt: {
+    type: Sequelize.STRING
   }
-);
+});
 
-module.exports = User;
+User.generateSalt = function() {
+  return crypto.randomBytes(20).toString("hex");
+};
+
+User.prototype.encryptPassword = function(password) {
+  return crypto
+    .createHmac("sha1", this.salt)
+    .update(password)
+    .digest("hex");
+};
+
+User.prototype.validatePassword = function(password) {
+  const hash = crypto
+    .createHmac("sha1", this.salt)
+    .update(password)
+    .digest("hex");
+  return this.password === hash;
+};
+
+User.addHook("beforeCreate", user => {
+  user.salt = User.generateSalt();
+  user.password = user.encryptPassword(user.password);
+});
+
+/// MODELO FAVORITOS
+var Favorite = db.define("favorite", {
+  idUser: {
+    type: Sequelize.INTEGER
+  },
+  imdbID: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  Title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  Poster: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  Type: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+// MODELO HISTORY
+var History = db.define("history", {
+  idUserH: {
+    type: Sequelize.INTEGER
+  },
+  textContent: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  date: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+module.exports = { User, Favorite, History };

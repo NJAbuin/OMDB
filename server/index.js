@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // SESSION
-app.use(session({ secret: "omdb" }));
+app.use(session({ secret: "omdb", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -1,6 +1,6 @@
 const api = require("express").Router();
 const { User } = require("../db/models/User");
-const passport = require("../db/passport");
+const passport = require("passport");
 
 //DELETE THIS ROUTES BEFORE DEPLOYING/////////////////
 //EDIT THE SEED TO SUIT YOUR MODEL REQUIREMENTS
@@ -32,12 +32,16 @@ api.get("/destroydb", (req, res) => {
 //////////////////////////////////////////////////////////
 
 api.post("/register", function(req, res, next) {
-  console.log(req.body);
   User.create(req.body)
     .then(user => {
       res.send(user);
     })
     .catch(err => console.log(err, "ERROR"));
+});
+
+api.get("/logout", function(req, res) {
+  req.logout();
+  res.send(200);
 });
 
 api.get("/users", (req, res) => {
@@ -53,14 +57,9 @@ api.post("/login", passport.authenticate("local"), function(req, res, next) {
 });
 
 api.get("/isLogin", function(req, res) {
-  let Session = req.session.passport;
-  let session = {
-    id: Session ? Session.user.id : "",
-    user: Session ? Session.user.user : "",
-    email: Session ? Session.user.email : ""
-  };
-
-  res.json(session);
+  console.log("USER");
+  console.log(req.user);
+  res.send(req.user);
 });
 
 api.get("/signout", function(req, res) {

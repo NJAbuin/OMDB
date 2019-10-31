@@ -6,18 +6,18 @@ export const loginUser = user => dispatch => {
     .post("/api/login", user)
     .then(res => res.data)
     .then(data => {
-      console.log(data);
       dispatch({
         type: LOGIN_USER,
-        payload: data
+        payload: data.username
       });
     })
     .catch(err => console.log(err));
 };
 
-export const logoutUser = user => dispatch => {
-  dispatch({
-    type: LOGOUT_USER,
-    payload: user
+export const logOutUser = () => dispatch => {
+  axios.get("/api/logout").then(data => {
+    dispatch({
+      type: LOGOUT_USER
+    });
   });
 };

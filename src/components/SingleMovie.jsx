@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 
 function SingleMovie(props) {
   const foundMovies = props.foundMovies.movies.foundMovies;
-  console.log(foundMovies);
   return (
     <div>
       {foundMovies.data &&
+        foundMovies.data.Search &&
         foundMovies.data.Search.map(movie => (
           <Link to={`/movies/${movie.imdbID}`} key={movie.imdbID}>
             <img src={movie.Poster} key={movie.imdbID} />

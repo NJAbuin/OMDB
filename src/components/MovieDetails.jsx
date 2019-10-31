@@ -22,24 +22,62 @@ class MovieDetails extends Component {
 
   render() {
     return (
-      <div>
-        <h1>DETAILS:</h1>
+      <div style={style}>
+        <h1 style={centerText}>DETAILS:</h1>
+        <hr />
+        <hr />
         <p>
           Title: {this.state.movie.Title} <br />
+          <br />
           Released: {this.state.movie.Released} <br />
+          <br />
           Genre: {this.state.movie.Genre} <br />
-          Director: {this.state.movie.Director}
-          Actors:{this.state.movie.Actors}
-          Country: {this.state.movie.Country}
-          IMDB Rating: {this.state.movie.imdbRating}
+          <br />
+          Director: {this.state.movie.Director} <br />
+          <br />
+          Actors:{this.state.movie.Actors} <br />
+          <br />
+          Country: {this.state.movie.Country} <br />
+          <br />
+          IMDB Rating: {this.state.movie.imdbRating} <br />
+          <br />
           Metascore: {this.state.movie.Metascore} <br />
+          <br />
           Plot: {this.state.movie.Plot} <br />
+          <br />
         </p>
-        <img src={this.state.movie.Poster} key={this.state.movie.imdbID} />
+        <hr />
+        <br />
+        <img
+          style={centerImg}
+          src={this.state.movie.Poster}
+          key={this.state.movie.imdbID}
+        />
       </div>
     );
   }
 }
+
+const centerText = {
+  textAlign: "center",
+  border: "3px solid gold"
+};
+
+const centerImg = {
+  display: " block",
+  marginLeft: "auto",
+  marginRight: "auto",
+  width: "40%"
+};
+
+const style = {
+  backgroundColor: "black",
+  color: "white",
+  margin: "auto",
+  width: "75%",
+  border: "3px solid gold",
+  padding: "10px"
+};
 
 export default connect(
   null,

@@ -32,30 +32,68 @@ export default class Register extends React.Component {
     };
     axios
       .post("/api/register", user)
-      .then(res => console.log(res))
+      .then(res => this.props.history.push("/"))
       .catch(err => console.log(err));
   }
   render() {
     return (
-      <div>
+      <div style={Style}>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Username:</label>
-            <input type="text" name="username" onChange={this.userHandler} />
+            <input
+              style={input}
+              type="text"
+              name="username"
+              onChange={this.userHandler}
+            />
           </div>
           <div>
             <label>Password:</label>
             <input
+              style={input}
               type="password"
               name="password"
               onChange={this.passwordHandler}
             />
           </div>
+          <br />
           <div>
-            <input type="submit" value="Register" />
+            <input style={center} type="submit" value="Register" />
           </div>
+          <br />
         </form>
       </div>
     );
   }
 }
+
+const input = {
+  width: "35%",
+  padding: "12px 20px",
+  margin: " 8px 15px",
+  boxSizing: " border-box",
+  backgroundColor: "#BEBEBE",
+  display: "block"
+};
+
+const center = {
+  textAlign: "center",
+  allign: "center",
+  margin: "auto",
+  width: "35%",
+  display: "block",
+  border: "1px solid gold",
+  lineHeight: "30px"
+};
+
+const Style = {
+  backgroundColor: "black",
+  color: "white",
+  margin: "auto",
+  width: "75%",
+  border: "3px solid yellow",
+  padding: "10px",
+
+  textAllign: "center"
+};
